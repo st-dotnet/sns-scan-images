@@ -1,0 +1,49 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.semanticui.min.css" />
+<div class="container">
+    <table id="scanImages" class="ui celled table" width="100%">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Sku</th>
+                <th>SerialNumber</th>
+                <th>Description</th>
+                <th>Images</th>
+                <th>CreatedOn</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+<script language="JavaScript" type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/dataTables.semanticui.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#scanImages').DataTable({
+            processing: true,
+            ordering: true,
+            paging: true,
+            searching: true,
+            "ajax": {
+                "url": '/Dashboard/GetScanImagesList',
+                "type": "GET",
+                "datatype": "json"
+            },
+            columns: [
+                { "data": "id", "name": "Id", "autoWidth": true },
+                { "data": "sku", "name": "Sku", "autoWidth": true },
+                { "data": "serialNumber", "name": "SerialNumber", "autoWidth": true },
+                { "data": "description", "name": "Description", "autoWidth": true },
+                { "data": "images", "name": "Images", "autoWidth": true },
+                { "data": "createdOn", "name": "CreatedOn", "autoWidth": true },
+            ]
+        });
+    });
+</script>
+
