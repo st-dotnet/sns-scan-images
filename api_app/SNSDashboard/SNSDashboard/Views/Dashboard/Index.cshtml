@@ -8,12 +8,11 @@
     <table id="scanImages" class="ui celled table" width="100%">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Sku</th>
-                <th>SerialNumber</th>
+                <th>SKU</th>
+                <th>Serial Number</th>
                 <th>Description</th>
-                <th>Images</th>
-                <th>CreatedOn</th>
+                <th>Image</th>
+                <th>Created On</th>
             </tr>
         </thead>
     </table>
@@ -36,14 +35,24 @@
                 "datatype": "json"
             },
             columns: [
-                { "data": "id", "name": "Id", "autoWidth": true },
                 { "data": "sku", "name": "Sku", "autoWidth": true },
                 { "data": "serialNumber", "name": "SerialNumber", "autoWidth": true },
                 { "data": "description", "name": "Description", "autoWidth": true },
-                { "data": "images", "name": "Images", "autoWidth": true },
-                { "data": "createdOn", "name": "CreatedOn", "autoWidth": true },
-            ]
+                {
+                    render: function (data, type, row) {
+                        return "<img width='30px' height='30px' src='/images/" + row.images + "'/>";
+                    }
+                },
+                {
+                    "data": "createdOn", "name": "CreatedOn", "autoWidth": true,
+                    "render": function (data) {
+                        var date = new Date(data);
+                        var month = date.getMonth() + 1;
+                        return (month.toString().length > 1 ? month : "0" + month) + "/" + date.getDate() + "/" + date.getFullYear();
+                    }
+                },
+            ],
+
         });
     });
 </script>
-

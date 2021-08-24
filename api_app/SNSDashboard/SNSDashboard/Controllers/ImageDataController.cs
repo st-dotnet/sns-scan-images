@@ -25,7 +25,7 @@ namespace SNSDashboard.Controllers
 
 
         /// <summary>
-        /// 
+        /// Create
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
@@ -34,14 +34,12 @@ namespace SNSDashboard.Controllers
         {
             try
             {
-                if (!ModelState.IsValid)
-                {
-                };
+                if (!ModelState.IsValid) return Ok(new { error = "Data is not valid." });
+
                 var data = _mapper.Map<ScanImageRequest>(model);
                 var result = await _scanImagesService.Create(data);
 
                 return Ok(result);
-                //(result);
             }
             catch (Exception ex)
             {

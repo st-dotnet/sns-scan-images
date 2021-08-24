@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace SNSDashboard.Models
 {
@@ -10,9 +8,13 @@ namespace SNSDashboard.Models
     {
         [JsonIgnore]
         public Guid Id { get; set; }
+        [Required]
         public string Sku { get; set; }
+        [Required]
         public string SerialNumber { get; set; }
+        [Required]
         public string Description { get; set; }
+        [Required]
         public string Images { get; set; }
         public DateTime CreatedOn { get; set; }
     }

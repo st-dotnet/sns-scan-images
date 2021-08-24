@@ -44,6 +44,7 @@ namespace SNS.Services.Services
             {
                 request.Images = LoadImage(request.Images);
                 var data = _mapper.Map<ScanImage>(request);
+                data.CreatedOn = DateTime.Now;
                 _scanImagesContext.ScanImages.Add(data);
                 await _scanImagesContext.SaveChangesAsync();
                 return true;
@@ -63,7 +64,7 @@ namespace SNS.Services.Services
             try
             {
                 var list = await _scanImagesContext.ScanImages.OrderBy(x => x.CreatedOn).ToListAsync();
-                list.AddRange(list);
+               
                 return list;
             }
             catch (Exception ex)
@@ -81,11 +82,17 @@ namespace SNS.Services.Services
         {
             try
             {
-                string uploadsFolder = Path.Combine(_hostEnvironment.ContentRootPath, _settings.ImagePath);
-                byte[] bytes = Convert.FromBase64String(image);
-                var fileName = $"{Guid.NewGuid()}.jpg";
-                string filePath = Path.Combine(uploadsFolder, fileName);
-                File.WriteAllBytes(filePath, bytes);
+                string fileName = null;
+
+                if (image != null)
+                {
+                    string uploadsFolder = Path.Combine(_hostEnvironment.ContentRootPath, _settings.ImagePath);
+                    byte[] bytes = Convert.FromBase64String(image);
+                    fileName = $"{Guid.NewGuid()}.jpg";
+                    string filePath = Path.Combine(uploadsFolder, fileName);
+                    File.WriteAllBytes(filePath, bytes);
+                }
+                
                 return fileName;
             }
             catch (Exception ex)

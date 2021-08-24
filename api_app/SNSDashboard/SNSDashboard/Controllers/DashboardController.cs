@@ -28,6 +28,10 @@ namespace SNSDashboard.Controllers
             return View();
         }
 
+        /// <summary>
+        /// GET: api/Products
+        /// </summary>
+        /// <returns></returns>
         public async Task<ActionResult> GetScanImagesList()
         {
             try
@@ -40,7 +44,6 @@ namespace SNSDashboard.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
 
     }
 }
