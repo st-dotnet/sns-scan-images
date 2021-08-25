@@ -76,7 +76,7 @@ namespace SNS.Services.Services
 
         #endregion
 
-        #region Public Methods
+        #region Private Methods
 
         private string LoadImage(string image)
         {
